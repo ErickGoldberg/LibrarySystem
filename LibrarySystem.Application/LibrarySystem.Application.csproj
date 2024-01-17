@@ -8,8 +8,11 @@
 
   <ItemGroup>
     <Folder Include="InputModels\" />
-    <Folder Include="Services\" />
     <Folder Include="ViewModels\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\LibrarySystem.Core\LibrarySystem.Core.csproj" />
   </ItemGroup>
 
 </Project>
