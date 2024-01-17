@@ -4,17 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LibrarySystem.Core.Entities
+namespace LibrarySystem.Application.InputModels
 {
-    public class Loan : BaseEntity
+    public class RegisterLoanInputModel
     {
-        public Loan(int userId, int bookId, DateTime loanDate) 
-        {
-            UserId = userId;
-            BookId = bookId;
-            LoanDate = loanDate;
-        }
-
         public int UserId { get; private set; }
         public int BookId { get; private set; }
         public DateTime LoanDate { get; private set; }

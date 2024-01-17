@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LibrarySystem.Application.InputModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,6 @@ namespace LibrarySystem.Application.Services.Interfaces
 {
     public interface ILoanService
     {
-        double RegisterLoan();
+        void RegisterLoan(RegisterLoanInputModel registerLoanInputModel);
     }
 }

@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using LibrarySystem.Application.InputModels;
+using LibrarySystem.Core.Entities;
 
 namespace LibrarySystem.Application.Services.Interfaces
 {
     public interface IUserService
     {
-        void RegisterUser();
+        void RegisterUser(CreateUserInputModel user);
     }
 }

@@ -1,4 +1,6 @@
-﻿using LibrarySystem.Application.Services.Interfaces;
+﻿using LibrarySystem.Application.InputModels;
+using LibrarySystem.Application.Services.Interfaces;
+using LibrarySystem.Core.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +11,11 @@ namespace LibrarySystem.Application.Services.Implementations
 {
     public class LoanService : ILoanService
     {
-        public double RegisterLoan()
+        public void RegisterLoan(RegisterLoanInputModel registerLoanInputModel)
         {
-            throw new NotImplementedException();
+            var loan = new Loan(registerLoanInputModel.UserId, registerLoanInputModel.BookId, registerLoanInputModel.LoanDate);
+
+            // Logic to add in database
         }
     }
 }
