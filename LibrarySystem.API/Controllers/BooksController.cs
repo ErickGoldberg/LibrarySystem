@@ -1,4 +1,5 @@
-﻿using LibrarySystem.Application.Services.Interfaces;
+﻿using LibrarySystem.Application.InputModels;
+using LibrarySystem.Application.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LibrarySystem.API.Controllers
@@ -31,11 +32,11 @@ namespace LibrarySystem.API.Controllers
         }
 
         [HttpPost("{id}")]
-        public IActionResult RegisterBook(int id)
+        public IActionResult RegisterBook(RegisterBookInputModel registerBookInputModel)
         {
-            _booksService.RegisterBook(id);
+            _booksService.RegisterBook(registerBookInputModel);
 
-            return Created("Book registered: ", id);
+            return Created("Book registered: ", registerBookInputModel.Title);
         }
 
         [HttpDelete("{id}")]

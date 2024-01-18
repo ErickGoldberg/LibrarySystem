@@ -1,4 +1,6 @@
-﻿using LibrarySystem.Core.Entities;
+﻿using LibrarySystem.Application.InputModels;
+using LibrarySystem.Application.ViewModels;
+using LibrarySystem.Core.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +11,9 @@ namespace LibrarySystem.Application.Services.Interfaces
 {
     public interface IBookService
     {
-        List<Book> GetAllBooks();
-        Book GetBookById(int id);
-        void RegisterBook(int id);
+        List<BookViewModel> GetAllBooks();
+        BookViewModel GetBookById(int id);
+        void RegisterBook(RegisterBookInputModel registerBookInputModel);
         void DeleteBook(int id);
     }
 }

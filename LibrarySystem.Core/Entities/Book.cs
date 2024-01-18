@@ -8,11 +8,17 @@ namespace LibrarySystem.Core.Entities
 {
     public class Book : BaseEntity
     {
-        public Book() { }
+        public Book(string title, string autor, string isbn, int publicationYear) 
+        {
+            Title = title;
+            Autor = autor;
+            ISBN = isbn;
+            PublicationYear = publicationYear;
+        }
 
-        public string Title { get; set; }
-        public string Autor { get; set; }
-        public string ISBN { get; set; }
-        public int PublicationYear { get; set; }
+        public string Title { get; private set; }
+        public string Autor { get; private set; }
+        public string ISBN { get; private set; }
+        public int PublicationYear { get; private set; }
     }
 }
