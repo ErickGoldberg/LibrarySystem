@@ -10,6 +10,5 @@ namespace LibrarySystem.Application.InputModels
     {
         public int UserId { get; private set; }
         public int BookId { get; private set; }
-        public DateTime LoanDate { get; private set; }
     }
 }

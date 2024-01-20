@@ -13,7 +13,7 @@ namespace LibrarySystem.Application.Services.Implementations
     {
         public void RegisterLoan(RegisterLoanInputModel registerLoanInputModel)
         {
-            var loan = new Loan(registerLoanInputModel.UserId, registerLoanInputModel.BookId, registerLoanInputModel.LoanDate);
+            var loan = new Loan(registerLoanInputModel.UserId, registerLoanInputModel.BookId);
 
             // Logic to add in database
         }

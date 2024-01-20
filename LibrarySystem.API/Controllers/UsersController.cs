@@ -18,7 +18,7 @@ namespace LibrarySystem.API.Controllers
 
         [HttpPost]
         public IActionResult RegisterUser([FromBody] CreateUserInputModel userInputModel)
-        {
+        {   
             _userService.RegisterUser(userInputModel);
 
             return Created("User created successfully!", _userService);

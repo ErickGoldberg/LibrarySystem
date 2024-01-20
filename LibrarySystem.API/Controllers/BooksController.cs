@@ -31,7 +31,7 @@ namespace LibrarySystem.API.Controllers
             return Ok();
         }
 
-        [HttpPost("{id}")]
+        [HttpPost]
         public IActionResult RegisterBook(RegisterBookInputModel registerBookInputModel)
         {
             _booksService.RegisterBook(registerBookInputModel);
