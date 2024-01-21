@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace LibrarySystem.Core.Entities
+﻿namespace LibrarySystem.Core.Entities
 {
     public class Loan : BaseEntity
     {
@@ -19,5 +13,7 @@ namespace LibrarySystem.Core.Entities
         public int UserId { get; private set; }
         public int BookId { get; private set; }
         public DateTime LoanDate { get; private set; }
+        public User User { get; set; }
+        public Book Book { get; set; }
     }
 }

@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace LibrarySystem.Core.Entities
+﻿namespace LibrarySystem.Core.Entities
 {
     public class Book : BaseEntity
     {
+        private Book() { }
         public Book(string title, string autor, string isbn, int publicationYear) 
         {
             Title = title;
@@ -18,7 +13,8 @@ namespace LibrarySystem.Core.Entities
 
         public string Title { get; private set; }
         public string Autor { get; private set; }
-        public string ISBN { get; private set; }
+        public string ISBN { get; private init; }
         public int PublicationYear { get; private set; }
+        public ICollection<Loan> Loans { get; private set; } = new List<Loan>();
     }
 }

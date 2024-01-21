@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace LibrarySystem.Core.Entities
+﻿namespace LibrarySystem.Core.Entities
 {
     public class User : BaseEntity
     {
@@ -15,6 +9,7 @@ namespace LibrarySystem.Core.Entities
         }
 
         public string Name { get; private set; }
-        public string Mail { get; private set; }    
+        public string Mail { get; private set; }
+        public ICollection<Loan> Loans { get; private set; } = new List<Loan>();
     }
 }

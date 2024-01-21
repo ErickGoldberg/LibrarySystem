@@ -3,6 +3,8 @@ using LibrarySystem.API.Filters;
 using LibrarySystem.Application.Services.Implementations;
 using LibrarySystem.Application.Services.Interfaces;
 using LibrarySystem.Application.Validators.Users;
+using LibrarySystem.Infrastructure.Persistence;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,8 +20,13 @@ builder.Services.AddScoped<IBookService, BookService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<ILoanService, LoanService>();
 
+// Validations (Fluent Validators)
 builder.Services.AddControllers(options => options.Filters.Add(typeof(ValidationFilter)))
     .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<CreateUserValidator>());
+
+// Connect Connection String
+builder.Services.AddDbContext<LibrarySystemDbContext>(options 
+    => options.UseSqlServer(builder.Configuration.GetConnectionString("LibrarySystemDb")));
 
 var app = builder.Build();
 
