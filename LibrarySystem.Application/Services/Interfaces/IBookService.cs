@@ -13,7 +13,7 @@ namespace LibrarySystem.Application.Services.Interfaces
     {
         List<BookViewModel> GetAllBooks();
         BookViewModel GetBookById(int id);
-        void RegisterBook(RegisterBookInputModel registerBookInputModel);
+        int RegisterBook(RegisterBookInputModel registerBookInputModel);
         void DeleteBook(int id);
     }
 }

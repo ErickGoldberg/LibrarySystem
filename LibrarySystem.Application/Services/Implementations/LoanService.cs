@@ -1,6 +1,7 @@
 ﻿using LibrarySystem.Application.InputModels;
 using LibrarySystem.Application.Services.Interfaces;
 using LibrarySystem.Core.Entities;
+using LibrarySystem.Infrastructure.Persistence;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,11 +12,21 @@ namespace LibrarySystem.Application.Services.Implementations
 {
     public class LoanService : ILoanService
     {
-        public void RegisterLoan(RegisterLoanInputModel registerLoanInputModel)
+        private readonly LibrarySystemDbContext _dbContext;
+
+        public LoanService(LibrarySystemDbContext dbContext)
+        {
+            _dbContext = dbContext;
+        }
+
+        public int RegisterLoan(RegisterLoanInputModel registerLoanInputModel)
         {
             var loan = new Loan(registerLoanInputModel.UserId, registerLoanInputModel.BookId);
 
-            // Logic to add in database
+            _dbContext.Loan.Add(loan);
+            _dbContext.SaveChanges();
+
+            return loan.Id;
         }
     }
 }

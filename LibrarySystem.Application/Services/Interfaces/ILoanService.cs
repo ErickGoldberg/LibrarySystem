@@ -9,6 +9,6 @@ namespace LibrarySystem.Application.Services.Interfaces
 {
     public interface ILoanService
     {
-        void RegisterLoan(RegisterLoanInputModel registerLoanInputModel);
+        int RegisterLoan(RegisterLoanInputModel registerLoanInputModel);
     }
 }

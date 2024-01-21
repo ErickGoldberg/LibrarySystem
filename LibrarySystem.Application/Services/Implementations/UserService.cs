@@ -1,16 +1,25 @@
 ﻿using LibrarySystem.Application.InputModels;
 using LibrarySystem.Application.Services.Interfaces;
 using LibrarySystem.Core.Entities;
+using LibrarySystem.Infrastructure.Persistence;
 
 namespace LibrarySystem.Application.Services.Implementations
 {
     public class UserService : IUserService
     {
+        private readonly LibrarySystemDbContext _dbContext;
+
+        public UserService(LibrarySystemDbContext dbContext)
+        {
+            _dbContext = dbContext;
+        }
+
         public void RegisterUser(CreateUserInputModel userInputModel)
         {
             var user = new User(userInputModel.Name, userInputModel.Mail);
 
-            // add to database te "user"
+            _dbContext.Users.Add(user);
+            _dbContext.SaveChanges();
         }
     }
 }

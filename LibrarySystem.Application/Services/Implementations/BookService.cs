@@ -2,45 +2,69 @@
 using LibrarySystem.Application.Services.Interfaces;
 using LibrarySystem.Application.ViewModels;
 using LibrarySystem.Core.Entities;
+using LibrarySystem.Infrastructure.Persistence;
 
 namespace LibrarySystem.Application.Services.Implementations
 {
     public class BookService : IBookService
     {
+        private readonly LibrarySystemDbContext _dbContext;
+
+        public BookService(LibrarySystemDbContext dbContext)
+        {
+            _dbContext = dbContext;
+        }
+
         public List<BookViewModel> GetAllBooks()
         {
-            //Get no banco para retornar book var book
+            var books = _dbContext.Books.Select(book => new BookViewModel
+            {
+                Autor = book.Autor,
+                Title = book.Title,
+                ISBN = book.ISBN,
+                PublicationYear = book.PublicationYear
+            }).ToList();
 
-            // atribuir book a bookViewModel
-
-            throw new NotImplementedException();
+            return books;
         }
 
         public BookViewModel GetBookById(int id)
         {
-            //Get no banco para retornar book var book
+            var book = _dbContext.Books.SingleOrDefault(i => i.Id == id);
 
-            // atribuir book a bookViewModel
-
-            throw new NotImplementedException();
+            return book != null ? new BookViewModel
+            {
+                Autor = book.Autor,
+                Title = book.Title,
+                ISBN = book.ISBN,
+                PublicationYear = book.PublicationYear
+            } : null;
         }
 
-        public void RegisterBook(RegisterBookInputModel registerBookInputModel)
+        public int RegisterBook(RegisterBookInputModel registerBookInputModel)
         {
             var book = new Book(registerBookInputModel.Title,
                                 registerBookInputModel.Autor,
                                 registerBookInputModel.ISBN,
                                 registerBookInputModel.PublicationYear);
 
-            // add to database
+            _dbContext.Books.Add(book);
+            _dbContext.SaveChanges();
 
-            throw new NotImplementedException();
+            return book.Id;
         }
 
         public void DeleteBook(int id)
         {
-            // 
-            throw new NotImplementedException();
+            var book = _dbContext.Books.SingleOrDefault(i => i.Id == id);
+
+            if (book != null)
+            {
+                _dbContext.Books.Remove(book);
+                _dbContext.SaveChanges();
+            }
+
+            return;
         }
     }
 }

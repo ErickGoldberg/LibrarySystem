@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 namespace LibrarySystem.API.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
     public class BooksController : ControllerBase
     {
         private readonly IBookService _booksService;
@@ -15,31 +14,37 @@ namespace LibrarySystem.API.Controllers
             _booksService = booksService;
         }
 
-        [HttpGet]
+        [HttpGet("Books")]
         public IActionResult GetAllBooks()
         {
             var books = _booksService.GetAllBooks();
 
-            return Ok();
+            if(books == null)
+                return NotFound("There are no books registered!");
+
+            return Ok(books);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("Book/{id}")]
         public IActionResult GetBook(int id)
         {
-            var books = _booksService.GetBookById(id);
+            var book = _booksService.GetBookById(id);
 
-            return Ok();
+            if (book == null)
+                return BadRequest("Id not found!");
+
+            return Ok(book);
         }
 
-        [HttpPost]
+        [HttpPost("Book/Register")]
         public IActionResult RegisterBook(RegisterBookInputModel registerBookInputModel)
         {
-            _booksService.RegisterBook(registerBookInputModel);
+            var bookId = _booksService.RegisterBook(registerBookInputModel);
 
-            return Created("Book registered: ", registerBookInputModel.Title);
+            return Created("Book registered: ", bookId);
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("Book/Delete/{id}")]
         public IActionResult DeleteBook(int id)
         {
             _booksService.DeleteBook(id);

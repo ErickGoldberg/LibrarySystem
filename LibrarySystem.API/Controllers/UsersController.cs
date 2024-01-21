@@ -16,7 +16,7 @@ namespace LibrarySystem.API.Controllers
             _userService = userService;
         }
 
-        [HttpPost]
+        [HttpPost("Register")]
         public IActionResult RegisterUser([FromBody] CreateUserInputModel userInputModel)
         {   
             _userService.RegisterUser(userInputModel);

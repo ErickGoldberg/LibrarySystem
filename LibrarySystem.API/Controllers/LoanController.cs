@@ -15,12 +15,12 @@ namespace LibrarySystem.API.Controllers
             _loanService = loanService;
         }
 
-        [HttpPost]
+        [HttpPost("Register")]
         public IActionResult RegisterLoan([FromBody] RegisterLoanInputModel registerLoanInputModel)
         {
-            _loanService.RegisterLoan(registerLoanInputModel);
+            var loanId = _loanService.RegisterLoan(registerLoanInputModel);
 
-            return Created("Loan made successfully!", _loanService);
+            return Created("Loan made successfully!", loanId);
         }
     }
 }
