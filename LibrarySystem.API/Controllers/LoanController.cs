@@ -1,5 +1,7 @@
-﻿using LibrarySystem.Application.InputModels;
+﻿using LibrarySystem.Application.Commands.RegisterLoan;
+using LibrarySystem.Application.InputModels;
 using LibrarySystem.Application.Services.Interfaces;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LibrarySystem.API.Controllers
@@ -8,17 +10,17 @@ namespace LibrarySystem.API.Controllers
     [Route("[controller]")]
     public class LoanController : ControllerBase
     {
-        private readonly ILoanService _loanService;
+        private IMediator _mediator;
 
-        public LoanController(ILoanService loanService)
+        public LoanController(IMediator mediator)
         {
-            _loanService = loanService;
+            _mediator = mediator;
         }
 
         [HttpPost("Register")]
-        public IActionResult RegisterLoan([FromBody] RegisterLoanInputModel registerLoanInputModel)
+        public async Task<IActionResult> RegisterLoan([FromBody] RegisterLoanCommand command)
         {
-            var loanId = _loanService.RegisterLoan(registerLoanInputModel);
+            var loanId = await _mediator.Send(command);
 
             return Created("Loan made successfully!", loanId);
         }

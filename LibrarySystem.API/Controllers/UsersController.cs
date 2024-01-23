@@ -1,6 +1,8 @@
-﻿using LibrarySystem.Application.InputModels;
+﻿using LibrarySystem.Application.Commands.CreateUser;
+using LibrarySystem.Application.InputModels;
 using LibrarySystem.Application.Services.Interfaces;
 using LibrarySystem.Core.Entities;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LibrarySystem.API.Controllers
@@ -9,19 +11,19 @@ namespace LibrarySystem.API.Controllers
     [Route("[controller]")]
     public class UsersController : ControllerBase
     {
-        private readonly IUserService _userService;
+        private IMediator _mediator;
 
-        public UsersController(IUserService userService)
+        public UsersController(IMediator mediator)
         {
-            _userService = userService;
+            _mediator = mediator;
         }
 
         [HttpPost("Register")]
-        public IActionResult RegisterUser([FromBody] CreateUserInputModel userInputModel)
-        {   
-            _userService.RegisterUser(userInputModel);
+        public async Task<IActionResult> RegisterUser([FromBody] CreateUserCommand command)
+        {
+            await _mediator.Send(command);
 
-            return Created("User created successfully!", _userService);
+            return Created("User created successfully!", command.Name);
         }
     }
 }

@@ -63,8 +63,6 @@ namespace LibrarySystem.Application.Services.Implementations
                 _dbContext.Books.Remove(book);
                 _dbContext.SaveChanges();
             }
-
-            return;
         }
     }
 }

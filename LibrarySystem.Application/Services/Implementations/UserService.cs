@@ -5,7 +5,7 @@ using LibrarySystem.Infrastructure.Persistence;
 
 namespace LibrarySystem.Application.Services.Implementations
 {
-    public class UserService : IUserService
+    public class UserService
     {
         private readonly LibrarySystemDbContext _dbContext;
 

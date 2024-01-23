@@ -1,5 +1,8 @@
-﻿using LibrarySystem.Application.InputModels;
+﻿using LibrarySystem.Application.Commands.DeleteBook;
+using LibrarySystem.Application.Commands.RegisterBook;
+using LibrarySystem.Application.InputModels;
 using LibrarySystem.Application.Services.Interfaces;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LibrarySystem.API.Controllers
@@ -7,11 +10,11 @@ namespace LibrarySystem.API.Controllers
     [ApiController]
     public class BooksController : ControllerBase
     {
-        private readonly IBookService _booksService;
+        private IMediator _mediator;
 
-        public BooksController(IBookService booksService)
+        public BooksController(IMediator mediator)
         {
-            _booksService = booksService;
+            _mediator = mediator;
         }
 
         [HttpGet("Books")]
@@ -37,17 +40,17 @@ namespace LibrarySystem.API.Controllers
         }
 
         [HttpPost("Book/Register")]
-        public IActionResult RegisterBook(RegisterBookInputModel registerBookInputModel)
+        public async Task<IActionResult> RegisterBook(RegisterBookCommand registerBookCommand)
         {
-            var bookId = _booksService.RegisterBook(registerBookInputModel);
+            var bookId = await _mediator.Send(registerBookCommand);
 
             return Created("Book registered: ", bookId);
         }
 
         [HttpDelete("Book/Delete/{id}")]
-        public IActionResult DeleteBook(int id)
+        public async Task<IActionResult> DeleteBook(DeleteBookCommand deleteBookCommand)
         {
-            _booksService.DeleteBook(id);
+            await _mediator.Send(deleteBookCommand);
 
             return NoContent();
         }
