@@ -1,9 +1,9 @@
-﻿using LibrarySystem.Application.ViewModels;
+﻿using LibrarySystem.Core.DTOs;
 using MediatR;
 
 namespace LibrarySystem.Application.Queries.GetAllBooks
 {
-    public class GetAllBooksQuery : IRequest<List<BookViewModel>>
+    public class GetAllBooksQuery : IRequest<List<BookDto>>
     {
         // Ignore
     }

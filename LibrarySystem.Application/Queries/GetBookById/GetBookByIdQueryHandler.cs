@@ -1,32 +1,21 @@
-﻿using LibrarySystem.Application.ViewModels;
-using LibrarySystem.Infrastructure.Persistence;
+﻿using LibrarySystem.Core.DTOs;
+using LibrarySystem.Core.Repositories;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 
 namespace LibrarySystem.Application.Queries.GetBookById
 {
-    public class GetBookByIdQueryHandler : IRequestHandler<GetBookByIdQuery, BookViewModel>
+    public class GetBookByIdQueryHandler : IRequestHandler<GetBookByIdQuery, BookDto>
     {
-        private readonly LibrarySystemDbContext _dbContext;
+        private readonly IBookRepository _bookRepository;
 
-        public GetBookByIdQueryHandler(LibrarySystemDbContext dbContext)
+        public GetBookByIdQueryHandler(IBookRepository bookRepository)
         {
-            _dbContext = dbContext;
+            _bookRepository = bookRepository;
         }
 
-        public async Task<BookViewModel> Handle(GetBookByIdQuery request, CancellationToken cancellationToken)
+        public async Task<BookDto> Handle(GetBookByIdQuery request, CancellationToken cancellationToken)
         {
-            var query = await _dbContext.Books.SingleOrDefaultAsync(i => i.Id == request.Id);
-
-            var book = query != null ? new BookViewModel
-            {
-                Autor = query.Autor,
-                Title = query.Title,
-                ISBN = query.ISBN,
-                PublicationYear = query.PublicationYear
-            } : null;
-
-            return book;
+            return await _bookRepository.GetByIdAsync(request.Id);
         }
     }
 }

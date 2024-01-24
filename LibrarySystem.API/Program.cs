@@ -2,7 +2,9 @@ using FluentValidation.AspNetCore;
 using LibrarySystem.API.Filters;
 using LibrarySystem.Application.Commands.CreateUser;
 using LibrarySystem.Application.Validators.Users;
+using LibrarySystem.Core.Repositories;
 using LibrarySystem.Infrastructure.Persistence;
+using LibrarySystem.Infrastructure.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -28,6 +30,8 @@ builder.Services.AddMediatR(config =>
     // Add other assemblies or configurations as needed
 });
 
+// Dependency Injection
+builder.Services.AddScoped<IBookRepository, BookRepository>();
 
 var app = builder.Build();
 

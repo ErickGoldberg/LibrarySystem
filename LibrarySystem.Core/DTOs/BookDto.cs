@@ -1,8 +1,6 @@
-﻿using MediatR;
-
-namespace LibrarySystem.Application.Commands.RegisterBook
+﻿namespace LibrarySystem.Core.DTOs
 {
-    public class RegisterBookCommand : IRequest<int>
+    public class BookDto
     {
         public string Title { get; set; }
         public string Autor { get; set; }

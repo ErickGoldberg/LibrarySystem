@@ -1,4 +1,6 @@
-﻿using LibrarySystem.Core.Entities;
+﻿using LibrarySystem.Core.DTOs;
+using LibrarySystem.Core.Entities;
+using LibrarySystem.Core.Repositories;
 using LibrarySystem.Infrastructure.Persistence;
 using MediatR;
 
@@ -6,24 +8,24 @@ namespace LibrarySystem.Application.Commands.RegisterBook
 {
     public class RegisterBookCommandHandler : IRequestHandler<RegisterBookCommand, int>
     {
-        private readonly LibrarySystemDbContext _dbContext;
+        private readonly IBookRepository _bookRepository;
 
-        public RegisterBookCommandHandler(LibrarySystemDbContext dbContext)
+        public RegisterBookCommandHandler(IBookRepository bookRepository)
         {
-            _dbContext = dbContext;
+            _bookRepository = bookRepository;
         }
 
         public async Task<int> Handle(RegisterBookCommand request, CancellationToken cancellationToken)
         {
-            var book = new Book(request.Title,
-                                request.Autor,
-                                request.ISBN,
-                                request.PublicationYear);
+            var book = new BookDto()
+            {
+                Title = request.Title,
+                Autor = request.Autor,
+                ISBN = request.ISBN,
+                PublicationYear = request.PublicationYear
+            };
 
-            await _dbContext.Books.AddAsync(book);
-            await _dbContext.SaveChangesAsync();
-
-            return book.Id;
+            return await _bookRepository.RegisterAsync(book);
         }
     }
 }

@@ -9,7 +9,6 @@
   <ItemGroup>
     <Folder Include="CloudServices\" />
     <Folder Include="CloudServices\Interfaces\" />
-    <Folder Include="Persistence\Repositories\" />
   </ItemGroup>
 
   <ItemGroup>
