@@ -1,4 +1,5 @@
 ﻿using LibrarySystem.Core.Entities;
+using LibrarySystem.Core.Repositories;
 using LibrarySystem.Infrastructure.Persistence;
 using MediatR;
 
@@ -6,19 +7,18 @@ namespace LibrarySystem.Application.Commands.CreateUser
 {
     public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand>
     {
-        private readonly LibrarySystemDbContext _dbContext;
+        private readonly IUserRepository _userRepository;
 
-        public CreateUserCommandHandler(LibrarySystemDbContext dbContext)
+        public CreateUserCommandHandler(IUserRepository userRepository)
         {
-            _dbContext = dbContext;
+            _userRepository = userRepository;
         }
 
         public async Task Handle(CreateUserCommand request, CancellationToken cancellationToken)
         {
             var user = new User(request.Name, request.Mail);
 
-            await _dbContext.Users.AddAsync(user);
-            await _dbContext.SaveChangesAsync();
+            await _userRepository.RegisterUserAsync(user);
         }
 
 

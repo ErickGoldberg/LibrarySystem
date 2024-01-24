@@ -1,26 +1,25 @@
 ﻿using LibrarySystem.Core.Entities;
+using LibrarySystem.Core.Repositories;
 using LibrarySystem.Infrastructure.Persistence;
+using LibrarySystem.Infrastructure.Persistence.Repositories;
 using MediatR;
 
 namespace LibrarySystem.Application.Commands.RegisterLoan
 {
     public class RegisterLoanCommandHandler : IRequestHandler<RegisterLoanCommand, int>
     {
-        private readonly LibrarySystemDbContext _dbContext;
+        private readonly ILoanRepository _loanRepository;
 
-        public RegisterLoanCommandHandler(LibrarySystemDbContext dbContext)
+        public RegisterLoanCommandHandler(ILoanRepository loanRepository)
         {
-            _dbContext = dbContext;
+            _loanRepository = loanRepository;
         }
 
         public async Task<int> Handle(RegisterLoanCommand request, CancellationToken cancellationToken)
         {
             var loan = new Loan(request.UserId, request.BookId);
 
-            await _dbContext.Loan.AddAsync(loan);
-            await _dbContext.SaveChangesAsync();
-
-            return loan.Id;
+            return await _loanRepository.RegisterLoanAsync(loan);
         }
     }
 }
