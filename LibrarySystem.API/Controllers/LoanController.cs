@@ -1,6 +1,4 @@
 ﻿using LibrarySystem.Application.Commands.RegisterLoan;
-using LibrarySystem.Application.InputModels;
-using LibrarySystem.Application.Services.Interfaces;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

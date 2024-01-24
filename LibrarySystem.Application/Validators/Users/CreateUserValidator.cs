@@ -1,10 +1,10 @@
 ﻿using FluentValidation;
-using LibrarySystem.Application.InputModels;
+using LibrarySystem.Application.Commands.CreateUser;
 using LibrarySystem.Application.Validators.Helper;
 
 namespace LibrarySystem.Application.Validators.Users
 {
-    public class CreateUserValidator : AbstractValidator<CreateUserInputModel>
+    public class CreateUserValidator : AbstractValidator<CreateUserCommand>
     {
         public CreateUserValidator()
         {

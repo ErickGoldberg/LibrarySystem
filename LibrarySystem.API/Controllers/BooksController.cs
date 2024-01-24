@@ -1,7 +1,7 @@
 ﻿using LibrarySystem.Application.Commands.DeleteBook;
 using LibrarySystem.Application.Commands.RegisterBook;
-using LibrarySystem.Application.InputModels;
-using LibrarySystem.Application.Services.Interfaces;
+using LibrarySystem.Application.Queries.GetAllBooks;
+using LibrarySystem.Application.Queries.GetBookById;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,9 +18,11 @@ namespace LibrarySystem.API.Controllers
         }
 
         [HttpGet("Books")]
-        public IActionResult GetAllBooks()
+        public async Task<IActionResult> GetAllBooks()
         {
-            var books = _booksService.GetAllBooks();
+            var query = new GetAllBooksQuery();
+
+            var books = await _mediator.Send(query);
 
             if(books == null)
                 return NotFound("There are no books registered!");
@@ -29,9 +31,10 @@ namespace LibrarySystem.API.Controllers
         }
 
         [HttpGet("Book/{id}")]
-        public IActionResult GetBook(int id)
+        public async Task<IActionResult> GetBook(int id)
         {
-            var book = _booksService.GetBookById(id);
+            var query = new GetBookByIdQuery { Id = id };
+            var book = await _mediator.Send(query);
 
             if (book == null)
                 return BadRequest("Id not found!");

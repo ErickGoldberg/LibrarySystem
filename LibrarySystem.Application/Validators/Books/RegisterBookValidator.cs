@@ -1,15 +1,10 @@
 ﻿using FluentValidation;
-using LibrarySystem.Application.InputModels;
+using LibrarySystem.Application.Commands.RegisterBook;
 using LibrarySystem.Application.Validators.Helper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LibrarySystem.Application.Validators.Books
 {
-    public class RegisterBookValidator : AbstractValidator<RegisterBookInputModel>
+    public class RegisterBookValidator : AbstractValidator<RegisterBookCommand>
     {
         public RegisterBookValidator()
         {

@@ -1,10 +1,9 @@
 ﻿using FluentValidation;
-using LibrarySystem.Application.InputModels;
-using LibrarySystem.Application.Validators.Helper;
+using LibrarySystem.Application.Commands.RegisterLoan;
 
 namespace LibrarySystem.Application.Validators.Loan
 {
-    public class RegisterLoanValidator : AbstractValidator<RegisterLoanInputModel>
+    public class RegisterLoanValidator : AbstractValidator<RegisterLoanCommand>
     {
         public RegisterLoanValidator()
         {
