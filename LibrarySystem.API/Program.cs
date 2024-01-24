@@ -32,6 +32,8 @@ builder.Services.AddMediatR(config =>
 
 // Dependency Injection
 builder.Services.AddScoped<IBookRepository, BookRepository>();
+builder.Services.AddScoped<ILoanRepository, LoanRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 var app = builder.Build();
 
