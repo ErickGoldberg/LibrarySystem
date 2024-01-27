@@ -7,9 +7,6 @@
 - CQRS
 - Padrao Repository
 - Validação de APIs (Fluent Validation)
-- Autenticação e Autorização com JWT
-- Testes Unitários (NUnit - Fluent Assertion)
-- Mensageria com RabbitMQ
 
 A Book/Library Management System, where it will be possible:
 - Register a Book
